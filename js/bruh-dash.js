@@ -10,23 +10,34 @@ var global = window || GLOBAL;
 global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function (arry) {
+      return arry[0]
   },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (arry) {
+    return arry[arry.length - 1]
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (arry, value) {
+      // if(typeof arry === typeof []) {
+        return arry.indexOf(value)
+      // } else {
+      //   return -1;
+      // }
   },
 
   // returns the index of the first matching element from right to left
-  lastIndexOf: function () {
-
+  lastIndexOf: function (arry, value) {
+    // return arry.lastIndexOf(value);
+    let index = -1;
+    for (let i = arry.length - 1; i >= 0; i--) {
+      if (arry[i] === value) {
+        index = i
+      }
+    }
+    return index
   },
 
   // returns an array with all elements except for the last element
