@@ -73,7 +73,8 @@ global.bruhdash = {
   drop: function(arry,num1){
     let empArry = [];
     if (num1 === undefined) {
-      return arry.shift();
+      arry.shift();
+      return arry;
     } else if (Boolean(num1) === true) {
       for (let i = num1; i < arry.length; i++) {
         empArry.push(arry[i]);
@@ -82,48 +83,102 @@ global.bruhdash = {
     } else {
       return arry;
     }
-    return arry;
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
+  //[1,2,3,4,5], 2), [1,2,3]
+  //slice(3,2)
 
+  dropRight: function(arry, num1) {
+    if (num1 === undefined) {
+      arry.pop();
+      return arry;
+    } else if (Boolean(num1) === true) {
+      arry.splice(arry.length - num1, num1)
+      return arry;
+    } else {
+      return arry;
+    }
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
-
+  take: function (arry, num1) {
+    let empArry = [];
+    if (num1 === undefined) {
+      empArry.push(arry[0])
+      return empArry
+    } else if (Boolean(num1) === true ) {
+      let sliceArry = arry.slice(0,num1)
+      return sliceArry;
+    } else {
+      return empArry;
+    }
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (arry, num1) {
+    let empArry = [];
+    if (num1 === undefined) {
+      empArry.push(arry[arry.length - 1])
+      return empArry
+    } else if (Boolean(num1) === true ) {
+      let sliceArry = arry.slice(arry.length - (num1), arry.length)
+      return sliceArry;
+    } else {
+      return empArry;
+    }
   },
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(arry, str, num1, num2) {
+    if (num1 === undefined) {
+      let empArry = []
+      for (i = 0; i < arry.length; i++) {
+        empArry.unshift(str)
+      }
+      return empArry;
+    } else {
+      let sliceArry = arry.slice(num1, num2);
+      for (let i = num1; i <= sliceArry.length; i++) {
+        arry.splice(i,1, str);
+      }
+      return arry;
+    }
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (arry, str1, str2) {
+    arry.splice(arry.indexOf(str1),1)
+    arry.splice(arry.indexOf(str2),1)
+    return arry
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arry1, arry2) {
+    let empArry = [];
+    empArry.push(arry1[arry2[0]])
+    empArry.push(arry1[arry2[1]])
+    return empArry;
   },
 
   // creates an array excluding all the specified values
-  without: function() {
-
+  without: function(arry, num1, num2) {
+    arry.splice(arry.indexOf(num1),1)
+    arry.splice(arry.indexOf(num2),1)
+    return arry
   },
 
   // returns an array with specified values excluded
-  difference: function() {
-
+  difference: function(arry1, arry2) {
+    let empArry = [];
+    for (let i = 0; i < arry1.length; i++) {
+      if(arry1[i] !== arry2[i]) {
+        let spliceArry = arry2.splice(i,arry2.length);
+        empArry.push(spliceArry.length)
+        return empArry
+      }
+    }
   },
 
   /*******************
@@ -131,13 +186,38 @@ global.bruhdash = {
    *******************/ 
 
   // creates an array of grouped elements
-  zip: function () {
+  zip: function (arry1, arry2) {
+    let empArry = [];
+    for (let i = 0; i < arry1.length; i++) {
+        empArry.push([arry1[i],arry2[i]])
+    }
+    return empArry
 
   },
 
   // creates an array of grouped elements in their pre-zip configuration
-  unzip: function () {
-
+  unzip: function (arry1) {
+    let newArry = [];
+    for (let i = 0; i < arry1.length; i++) {
+      for(let x = 0; x < arry1[0].length; x++) {
+         console.log(x,i)
+         newArry.push(arry1[i][x])
+      }
+    }
+    let newArry1 = [];
+    let newArry2 = [];
+    let empArry = []
+    // console.log(newArry)
+    // console.log(newArry.length)
+    for (let i = 0; i < newArry.length; i+=2) {
+    // console.log(newArry[i])
+    newArry1.push(newArry[i])
+    }
+    for (let i = 1; i < newArry.length; i+=2) {
+    newArry2.push(newArry[i])
+    }
+    empArry.push(newArry1,newArry2)
+    return empArry
   },
 
   // creates an array of elements into groups of length of specified size
