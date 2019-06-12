@@ -41,23 +41,48 @@ global.bruhdash = {
   },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function (arry) {
+      arry.pop()
+    return arry;
   },
   
   // returns an array with all falsey values removed
-  compact: function() {
-
+  compact: function(arry) {
+    let empArry = []
+    for (let i = 0; i < arry.length; i++) {
+      // for (let x = 0; x < falsey.length; x++) {
+        if(Boolean(arry[i]) !== false) {
+          empArry.push(arry[i])
+        }
+      // }
+    }
+    return empArry;
   },
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (arry, num1, num2) {
+      // return arry.slice(num1, num2)
+      let empArry = [];
+    for (let i = num1; i < num2; i++) {
+      empArry.push(arry[i])
+    }
+    return empArry;
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
-
+  drop: function(arry,num1){
+    let empArry = [];
+    if (num1 === undefined) {
+      return arry.shift();
+    } else if (Boolean(num1) === true) {
+      for (let i = num1; i < arry.length; i++) {
+        empArry.push(arry[i]);
+      } 
+      return empArry;
+    } else {
+      return arry;
+    }
+    return arry;
   },
 
   // returns a slice of array with n elements dropped from the end
