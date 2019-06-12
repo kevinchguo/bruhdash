@@ -200,6 +200,7 @@ global.bruhdash = {
     let newArry = [];
     for (let i = 0; i < arry1.length; i++) {
       for(let x = 0; x < arry1[0].length; x++) {
+        //second forloop will loop through the length of the array in the array (2)
          console.log(x,i)
          newArry.push(arry1[i][x])
       }
@@ -221,14 +222,35 @@ global.bruhdash = {
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(){
-
+  chunk: function(arry1, num){
+    let arryLength = arry1.length
+    let empArry = [];
+    if (arryLength === 0) {
+    return empArry
+    } else if(num >= arryLength) {
+      empArry.push(arry1)
+      return empArry
+    } else if (num === 0) {
+      return empArry
+    } else if(arryLength === 0) {
+      return empArry
+    } else {
+      //i declaration needs to be divided by num or else it'll keep making empty boxes
+      for (let i = 0; i < arryLength/num; i++) {
+        empArry.push(arry1.splice(0, num))
+      }
+      return empArry;
+    }
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function() {
-
+  forEach: function(value) {
+    let empArry = [];
+    for (let x in value) {
+      empArry.push(value[x]);
+    }
+    return empArry, value;
   },
 
   // creates an array of values by running each element in collection thru the iteratee
